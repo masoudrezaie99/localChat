@@ -1,6 +1,6 @@
 <template>
   <template v-for="(item,index) in  myMessages" :key="item.origin">
-    <div class="chat-item">
+    <div class="chat-item" @click="item.origin == origin ? destination = item.destination : destination = item.origin">
       <div class="chat-avatar"></div>
       <div class="chat-info">
         <div class="chat-name">{{ item.origin == origin ? item.destination : item.origin }}</div>

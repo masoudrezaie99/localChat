@@ -12,7 +12,7 @@
       <div class="chat-messages">
         <template 
         v-for="item in myMessages" :key="item.origin">
-          <div
+          <div v-if="destination !=''"
             
             
             :class="[
