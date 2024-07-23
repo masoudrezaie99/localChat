@@ -12,7 +12,7 @@
       <div class="chat-messages">
         <template 
         v-for="item in myMessages" :key="item.origin">
-          <div v-if="destination !=''"
+          <div v-if="destination ==item.origin || destination==item.destination"
             
             
             :class="[
@@ -59,7 +59,7 @@ import { ref } from 'vue'
         setup(){
     const messageStore  = useMessageStore()
 
-    const {Messages , message , origin , destination , timestamp , myMessages} = storeToRefs(messageStore)
+    let {Messages , message , origin , destination , timestamp , myMessages} = storeToRefs(messageStore)
 
     const filter = ref('all')
 
@@ -69,6 +69,17 @@ messageStore.setSession()
 const sendMessage = ()=>{
   messageStore.sendMessage()
 }
+
+
+
+window.addEventListener("storage", (event) => {
+        if (event.key === "chatMessages") {
+          messageStore.updateMessage()
+        }
+        
+      });
+
+  
 
 
 
