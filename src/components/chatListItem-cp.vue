@@ -1,17 +1,4 @@
 <template>
-  <!-- <template v-for="(item,index) in  myMessages" :key="item.origin">
-    <div class="chat-item" @click="item.origin == origin ? destination = item.destination : destination = item.origin">
-      <div class="chat-avatar"></div>
-      <div class="chat-info">
-        <div class="chat-name">{{ item.origin == origin ? item.destination : item.origin }}</div>
-        <div class="chat-last-message">{{index}} , {{ item.text }}</div>
-      </div>
-      <div class="chat-details">
-        <div class="chat-date">{{ item.timestamp }}</div>
-        <div class="unread-count">3</div>
-      </div>
-    </div>
-  </template> -->
 
   <template v-for="(item) in  filteredMessages" :key="item.timestamp">
     <div class="chat-item" @click="destination = item.contact">

@@ -81,9 +81,6 @@ export const useMessageStore = defineStore('messagestore',{
         },
 
 
-        // lastMessages(id){
-        //     myMessages.findLastIndex((msg)=> msg.origin==id) > myMessages.findLastIndex((msg)=> msg.destination==id) ? myMessages.findLast((msg)=> msg.origin==id) : myMessages.findLast((msg)=> msg.destination==id);
-        // },
 
 
     }
