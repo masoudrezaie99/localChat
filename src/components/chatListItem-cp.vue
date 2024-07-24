@@ -1,10 +1,24 @@
 <template>
-  <template v-for="(item,index) in  myMessages" :key="item.origin">
+  <!-- <template v-for="(item,index) in  myMessages" :key="item.origin">
     <div class="chat-item" @click="item.origin == origin ? destination = item.destination : destination = item.origin">
       <div class="chat-avatar"></div>
       <div class="chat-info">
         <div class="chat-name">{{ item.origin == origin ? item.destination : item.origin }}</div>
         <div class="chat-last-message">{{index}} , {{ item.text }}</div>
+      </div>
+      <div class="chat-details">
+        <div class="chat-date">{{ item.timestamp }}</div>
+        <div class="unread-count">3</div>
+      </div>
+    </div>
+  </template> -->
+
+  <template v-for="(item) in  filteredMessages" :key="item.timestamp">
+    <div class="chat-item" @click="destination = item.contact">
+      <div class="chat-avatar"></div>
+      <div class="chat-info">
+        <div class="chat-name">{{ item.contact }}</div>
+        <div class="chat-last-message">{{item.msg}}</div>
       </div>
       <div class="chat-details">
         <div class="chat-date">{{ item.timestamp }}</div>
@@ -25,7 +39,7 @@ import { ref } from 'vue'
         setup(){
     const messageStore  = useMessageStore()
 
-    const {Messages , message , origin , destination , timestamp , myMessages} = storeToRefs(messageStore)
+    const {Messages , message , origin , destination , timestamp , myMessages,filteredMessages} = storeToRefs(messageStore)
 messageStore.setSession()
 
 
@@ -33,7 +47,7 @@ const filter = ref('all')
 
 
 
-    return{Messages , message , origin , destination , timestamp,  myMessages , filter}
+    return{Messages , message , origin , destination , timestamp,  myMessages , filter,filteredMessages}
   },
     }
 </script>

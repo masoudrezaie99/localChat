@@ -13,14 +13,39 @@ export const useMessageStore = defineStore('messagestore',{
             minute: "numeric",
             hour12: true,
           }),
+
     }),
 
 
     getters:{
         myMessages(){
             return this.Messages.filter((message)=> message.origin==this.origin || message.destination == this.origin)
+        },
 
+        
+
+
+
+
+        messageList(){
+            let msgList = []
+            for (let i = 0; i < this.myMessages.length; i++){
+                if(this.myMessages[i].origin == this.origin){msgList.push({'contact':this.myMessages[i].destination,'msg':this.myMessages[i].text,'timestamp':this.myMessages[i].timestamp})}
+                else if(this.myMessages[i].destination == this.origin){msgList.push({'contact':this.myMessages[i].origin,'msg':this.myMessages[i].text,'timestamp':this.myMessages[i].timestamp})}
+            }
+            return msgList
+        },
+
+
+        filteredMessages() {
+            return Object.values(this.messageList.reduceRight((acc, message) => {
+                if (!acc[message.contact]) {
+                    acc[message.contact] = message;
+                }
+                return acc;
+            }, {}));
         }
+
     },
 
 
@@ -42,7 +67,7 @@ export const useMessageStore = defineStore('messagestore',{
                 text:this.message,
                 timestamp:this.timestamp,
                 origin:this.origin,
-                destination:this.destination
+                destination:this.destination,
             }
 
             this.Messages.push(newMessage)
@@ -53,9 +78,12 @@ export const useMessageStore = defineStore('messagestore',{
 
         updateMessage(){
             this.Messages = JSON.parse(localStorage.chatMessages);
-        }
+        },
 
 
+        // lastMessages(id){
+        //     myMessages.findLastIndex((msg)=> msg.origin==id) > myMessages.findLastIndex((msg)=> msg.destination==id) ? myMessages.findLast((msg)=> msg.origin==id) : myMessages.findLast((msg)=> msg.destination==id);
+        // },
 
 
     }
