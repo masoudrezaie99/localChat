@@ -3,7 +3,6 @@ import { defineStore } from 'pinia';
 
 export const useMessageStore = defineStore('messagestore',{
     state : ()=>({
-        localStorageData : localStorage.getItem("chatMessages"),
         Messages:[],
         message:'',
         origin:'',
@@ -71,6 +70,7 @@ export const useMessageStore = defineStore('messagestore',{
             }
 
             this.Messages.push(newMessage)
+            console.log(JSON.stringify(this.Messages))
             localStorage.chatMessages = JSON.stringify(this.Messages)
             
         },

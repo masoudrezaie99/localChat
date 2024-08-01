@@ -9,7 +9,7 @@
       </div>
       <div class="chat-details">
         <div class="chat-date">{{ item.timestamp }}</div>
-        <div class="unread-count">3</div>
+        <!-- <div class="unread-count">3</div> -->
       </div>
     </div>
   </template>
